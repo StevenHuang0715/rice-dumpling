@@ -1,0 +1,111 @@
+﻿@model FoodWebsite.Models.ProductPage_Model
+@{
+	ViewBag.Title = "ProductPage";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+	<script type="text/javascript">
+		$(function () {
+			debugger;
+
+			var id = "pills-team" + @Model.SelectItemId;
+			@*小圖示*@
+			$('#' + id + "-tab").addClass('active');
+			$('#' + id + "-tab").attr("activearia-selected", "true");
+
+			@*下方圖片*@
+			$('#' + id).addClass('show');
+			$('#' + id).addClass('active');
+
+		})
+
+	</script>
+}
+
+<body>
+	<section class="w3l-about-breadcrumb">
+		<div class="breadcrumb-bg breadcrumb-bg-about py-5">
+			<div class="container py-lg-4 py-md-3">
+				<h2 class="title">你最愛的美食都在這</h2>
+			</div>
+		</div>
+	</section>
+	<!-- tabs team-->
+	<section class="team py-5" id="team">
+		<div class="container py-lg-5 py-md-4 py-2">
+			<ul class="nav nav-pills" id="pills-tab1" role="tablist">
+				@*小圖示選單*@
+				@for (int i = 0; i < Model.GroupItem.Count; i++)
+				{
+					var id = "pills-team" + Model.GroupItem[i].ProductGroupsId + "-tab";
+					var href = "#pills-team" + Model.GroupItem[i].ProductGroupsId;
+					if (Model.GroupItem[i].ImageUrl != null)
+					{
+						<li class="nav-item">
+							<a class="nav-link" id="@id" data-toggle="pill" href="@href" role="tab" aria-controls="@href" aria-selected="false"><img src="@Model.GroupItem[i].ImageUrl" class="img-fluid" alt="" /></a>
+						</li>
+					}
+
+				}
+				@*範例樣式*@
+				@*<li class="nav-item">
+						<a class="nav-link" id="pills-team1-tab" data-toggle="pill" href="#pills-team1" role="tab" aria-controls="pills-team1" aria-selected="false"><img src="~/images/1.png" class="img-fluid" alt="" /></a>
+					</li>*@
+
+			</ul>
+			<div class="tab-content" id="pills-tabContent1">
+				@*要依組別顯示下方圖片*@
+				@{
+					for (int i = 0; i < Model.GroupItem.Count; i++)
+					{
+						string id = "pills-team" + Model.GroupItem[i].ProductGroupsId;
+						string checkGroup = Model.GroupItem[i].ProductGroupsId.ToString();
+
+						<div class="tab-pane fade" id="@id" role="tabpanel" aria-labelledby="@id-tab">
+							@for (int j = 0; j < Model.Products.Count; j++)
+							{
+								if (Model.Products[j].Product.Group == checkGroup)
+								{
+									<div class="team-grids row" id="Product_@Model.Products[j].Product.Id">
+										<div class="col-lg-6">
+											<img src="@Model.Products[j].Product.Image2" class="img-fluid" alt="" />
+										</div>
+										<div class="col-lg-6 align-self mt-lg-0 mt-md-5 mt-4">
+											<h4>@Model.Products[j].Product.Name <span>$@Model.Products[j].Product.Price</span></h4>
+											<p class="pt-3">
+												@Model.Products[j].Product.Descrition
+											</p>
+
+											<a href="#buy" class="btn btn-style btn-primary mt-md-5 mt-4">Buy Now</a>
+										</div>
+									</div>
+									<hr />
+								}
+							}
+						</div>
+					}
+				}
+
+				@*範例樣式*@
+				@*<div class="tab-pane fade" id="pills-team1" role="tabpanel" aria-labelledby="pills-team1-tab">
+						<div class="team-grids row">
+							<div class="col-lg-6">
+								<img src="~/images/Food/meat1.jpg" class="img-fluid" alt="" />
+							</div>
+							<div class="col-lg-6 align-self mt-lg-0 mt-md-5 mt-4">
+								<h4>台北粽 <span> $55</span></h4>
+								<p class="pt-3">
+									Donec malesuada ex sit amet pretium sid ornare. Nulla congue scelerisque tellus, utpretium. Mauris suscipit
+									nisi ut ipsum egestas, et velit convallis. Phasellus rhoncus tempus.
+								</p>
+								<a href="#buy" class="btn btn-style btn-primary mt-md-5 mt-4">Buy Now</a>
+							</div>
+						</div>
+					</div>*@
+
+			</div>
+		</div>
+	</section>
+	<!-- //tabs team -->
+
+</body>

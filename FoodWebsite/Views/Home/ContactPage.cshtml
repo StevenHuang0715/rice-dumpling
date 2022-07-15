@@ -1,0 +1,73 @@
+﻿
+@{
+	ViewBag.Title = "ContactPage";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body>
+
+	<section class="w3l-about-breadcrumb">
+		<div class="breadcrumb-bg breadcrumb-bg-about py-5">
+			<div class="container py-lg-4 py-md-3">
+				<h2 class="title">Contact us</h2>
+			</div>
+		</div>
+	</section>
+	<div class="w3l-contact-info py-5" id="contact">
+		<div class="container py-lg-5 py-md-4">
+			<div class="align-self mt-lg-0 mt-md-5 mt-4">
+				<div class="contact-infos">
+					<div class="single-contact-infos">
+						<div class="icon-box"> <span class="fa fa-map-marker"></span></div>
+						<div class="text-box">
+							<h3 class="mb-3">地點資訊</h3>
+							<p>台北市松山區忠孝東路五段372巷27弄77之2號</p>
+						</div>
+					</div>
+					<div class="single-contact-infos">
+						<div class="icon-box"> <span class="fa fa-clock-o"></span></div>
+						<div class="text-box">
+							<h3 class="mb-3">營業時間</h3>
+							<p class="">周一到週五 : 11:30 - 20:30</p>
+							<p class="">周六、周日 : 公休 </p>
+						</div>
+					</div>
+					<div class="single-contact-infos">
+						<div class="icon-box"> <span class="fa fa-envelope"></span></div>
+						<div class="text-box">
+							<h3 class="mb-3">聯絡資訊</h3>
+							<p class=""><a href="tel: +(886)87592510">(02)8759-2510</a></p>
+							<p class=""> <a href="mailto:info@mail.com">info@mail.com</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-lg-6 map">
+					
+					<iframe width="100%" height="300" frameborder="0" src="https://www.google.com/maps?q=台北市松山區忠孝東路五段372巷27弄77-2號&hl=zh-TW&z=17&t=&output=embed">
+					</iframe>
+				</div>
+				<div class="col-lg-6 form-inner-cont mt-lg-0 mt-sm-5 mt-4">
+					<form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+						<div class="form-input">
+							<input type="text" name="w3lName" id="w3lName" placeholder="Your name">
+						</div>
+						<div class="form-input">
+							<input type="email" name="w3lSender" id="w3lSender" placeholder="Your email address"
+								   required="">
+						</div>
+						<div class="form-input">
+							<textarea name="w3lMessage" id="w3lMessage" placeholder="Your message" required=""></textarea>
+						</div>
+						<div class="text-center">
+							<button type="submit" class="btn btn-style btn-primary">Submit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+

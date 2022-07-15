@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+	<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="//fonts.googleapis.com/css?family=Mukta:300,400,500" rel="stylesheet">
+	<!-- Template CSS -->
+	<link href="~/Content/style-starter.css" rel="stylesheet" />
+	@RenderSection("styles", required: false)
+</head>
+<body>
+	<!--header-->
+	<header id="site-header" class="fixed-top">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg stroke px-0 pt-lg-0">
+				<h1>
+					<a class="navbar-brand" href="/Home/Index">
+						<span class="fa fa-coffee"></span> 金田肉粽
+					</a>
+				</h1>
+				<!-- if logo is image enable this
+				<a class="navbar-brand" href="#index.html">
+					<img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+				</a> -->
+				<button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+						data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+						aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+					<span class="navbar-toggler-icon fa icon-close fa-times"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+					<ul class="navbar-nav mx-lg-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/Home/Index">首頁 <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item about__active">
+							<a class="nav-link" href="/Home/AboutPage">關於我們</a>
+						</li>
+						<li class="nav-item services__active">
+							<a class="nav-link" href="/Home/ProductPage">探索美食</a>
+						</li>
+						<li class="nav-item contact__active">
+							<a class="nav-link" href="/Home/ContactPage">聯絡我們</a>
+						</li>
+					</ul>
+
+					<!--/search-right-->
+					<div class="search-right">
+						<a href="#search" title="search"><span class="fa fa-search" aria-hidden="true"></span></a>
+						<!-- search popup -->
+						<div id="search" class="pop-overlay">
+							<div class="popup">
+
+								<form action="error.html" method="GET" class="search-box">
+									<input type="search" placeholder="Enter Keyword" name="search" required="required"
+										   autofocus="">
+									<button type="submit" class="btn">
+										<span class="fa fa-search"
+											  aria-hidden="true"></span>
+									</button>
+								</form>
+
+							</div>
+							<a class="close" href="#close">×</a>
+						</div>
+						<!-- /search popup -->
+					</div>
+					<!--//search-right-->
+					<div class="top-quote mr-lg-3 mt-lg-0">
+						<a href="/Home/BuyPage01" class="btn btn-style btn-primary">Buy Now</a>
+					</div>
+				</div>
+				<!-- toggle switch for light and dark theme -->
+				<div class="mobile-position">
+					<nav class="navigation">
+						<div class="theme-switch-wrapper">
+							<label class="theme-switch" for="checkbox">
+								<input type="checkbox" id="checkbox">
+								<div class="mode-container">
+									<i class="gg-sun"></i>
+									<i class="gg-moon"></i>
+								</div>
+							</label>
+						</div>
+					</nav>
+				</div>
+				<!-- //toggle switch for light and dark theme -->
+			</nav>
+		</div>
+	</header>
+	<!--/header-->
+		@RenderBody()
+		<hr />
+		<section class="w3l-footer-29-main">
+			<div class="footer-29 py-5">
+				<div class="container py-lg-4 py-sm-3">
+					<div class="row footer-top-29">
+						<div class="col-lg-5 footer-list-29 footer-1">
+							<h2><a href="index.html" class=""><span class="fa fa-coffee"></span> 金田肉粽店</a></h2>
+							<p>
+								我們為咖啡愛好者製作美味的咖啡。我們是一群敬業的咖啡愛好者，他們通過為客人提供獨特
+								的機會來品嚐咖啡飲料來慶祝卓越的咖啡品牌和烘焙商
+							</p>
+						</div>
+						<div class="col-lg-3 col-md-6 footer-list-29 footer-3 mt-lg-0 mt-5">
+							<h6 class="footer-title-29">聯繫我們</h6>
+
+							<div class="column2">
+								<div class="mb-2">
+									<span>地址：</span>
+									<p class="contact-para d-inline">台北市松山區忠孝東路五段372巷27弄77之2號</p>
+								</div>
+								<div class="">
+									<span>E-mail :</span><a href="mailto:info@mail.com">info@mail.com</a>
+								</div>
+								<div class="mt-2">
+									<span>電話：</span><a href="tel: +(886)87592510">(02)8759-2510</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 footer-list-29 footer-4 mt-lg-0 mt-5">
+							<h6 class="footer-title-29">通訊</h6>
+							<p>
+								輸入您的電子郵件並接收我們的最新消息。我們永遠不會外洩您的電子郵件地址
+							</p>
+
+							<form action="#" class="subscribe" method="post">
+								<input type="email" name="email" placeholder="您的Email信箱" required="">
+								<button><span class="fa fa-paper-plane"></span></button>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="bottom-copies text-center">
+				<div class="container">
+					<p class="copy-footer-29">
+						© 2020 Coffee Cafe. All rights reserved | Designed by <a href="https://w3layouts.com">W3layouts</a>
+					</p>
+				</div>
+			</div>
+
+			<!-- move top -->
+			<button onclick="topFunction()" id="movetop" title="Go to top">
+				<span class="fa fa-angle-up"></span>
+			</button>
+			<script>
+				// When the user scrolls down 20px from the top of the document, show the button
+				window.onscroll = function () {
+					scrollFunction()
+				};
+
+				function scrollFunction() {
+					if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+						document.getElementById("movetop").style.display = "block";
+					} else {
+						document.getElementById("movetop").style.display = "none";
+					}
+				}
+
+				// When the user clicks on the button, scroll to the top of the document
+				function topFunction() {
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+				}</script>
+			<!-- //move top -->
+		</section>
+		
+	<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script src="~/Scripts/modernizr-2.8.3.js"></script>
+	<!-- Template JavaScript -->
+	<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+	<script src="~/Scripts/theme-change.js"></script>
+	<!-- js for portfolio lightbox -->
+	<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+	<script src="~/Scripts/jquery.chocolat.js"></script>
+
+	<!-- /js for portfolio lightbox -->
+
+	<script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+
+	<!--Template End-->
+	<script>
+		$(window).on("scroll", function () {
+			var scroll = $(window).scrollTop();
+
+			if (scroll >= 80) {
+				$("#site-header").addClass("nav-fixed");
+			} else {
+				$("#site-header").removeClass("nav-fixed");
+			}
+		});
+	</script>
+	@RenderSection("scripts", required: false)
+</body>
+</html>

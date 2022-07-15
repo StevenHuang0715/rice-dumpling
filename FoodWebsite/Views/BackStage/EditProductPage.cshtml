@@ -1,0 +1,186 @@
+﻿@model FoodWebsite.Models.EditProductPage_Model
+@{
+    ViewBag.Title = "EditProductPage";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+@section Scripts{
+	<script type="text/javascript">
+		$(function () {
+			debugger;
+			var src = "/images/noImage.jpg"; //替換的圖片
+			if ('@Model.Product.Image1' == '')
+			{
+				document.getElementById('image1_@Model.Product.Id').src = src;
+			}
+			if ('@Model.Product.Image2' == '')
+			{
+				document.getElementById('image2_@Model.Product.Id').src = src;
+			}
+			if ('@Model.Product.Image3' == '')
+			{
+				document.getElementById('image3_@Model.Product.Id').src = src;
+			}
+		})
+
+		function nofind() {
+			debugger;
+			var img = event.srcElement;
+			img.src = "http://mat1.gtimg.com/cd/2017/home/nlogo0518.png"; //替換的圖片
+			img.onerror = null; //控制不要一直觸發錯誤
+		}
+	</script>
+}
+
+<h2>EditProductPage</h2>
+
+
+<body>
+	<main id="main" class="main">
+		<div class="pagetitle">
+			<h1>新增商品</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item">Forms</li>
+					<li class="breadcrumb-item active">Elements</li>
+				</ol>
+			</nav>
+		</div><!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="card">
+					<div class="card-body" id="ProductContent">
+						<h5 class="card-title">商品資訊</h5>
+						@using (Ajax.BeginForm("EditProductPage02", "BackStage", new AjaxOptions()
+						{
+							HttpMethod = "POST",
+							UpdateTargetId = "ProductContent",
+							InsertionMode = InsertionMode.Replace
+						}, new { enctype = "multipart/form-data" }))
+						{
+							@*左半邊區塊*@
+							@Html.HiddenFor(p => p.Product.Id)
+							<div class="col-lg-12">
+								<div class="row mb-3">
+									<label for="inputText" class="col-sm-2 col-form-label">
+										@*商品名稱*@
+										@Html.DisplayNameFor(m => m.Product.Name)
+									</label>
+									<div class="col-sm-10">
+										@Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control" })
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label">
+										@*商品種類*@
+										@Html.DisplayNameFor(m => m.Product.Group)
+									</label>
+									<div class="col-sm-10">
+										@Html.TextBoxFor(m => m.Group, new { @class = "form-control" })
+									</div>
+								</div>
+								<div class="row">
+									<label for="inputNumber" class="col-sm-2 col-form-label">
+										@*定價*@
+										@Html.DisplayNameFor(m => m.Product.Price)
+									</label>
+									<div class="col-sm-10">
+										<div class="input-group mb-3">
+											<span class="input-group-text">$</span>
+											@Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control", @type = "number" })
+										</div>
+									</div>
+
+								</div>
+								<div class="row mb-3">
+									<label for="inputNumber" class="col-sm-2 col-form-label">
+										@*庫存*@
+										@Html.DisplayNameFor(m => m.Product.Stock)
+									</label>
+									<div class="col-sm-10">
+										@Html.TextBoxFor(m => m.Product.Stock, new { @class = "form-control", @type = "number" })
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputNumber" class="col-sm-2 col-form-label">
+										@*商品圖片*@
+										商品圖片
+									</label>
+									<div class="col-sm-10">
+										<table style="width:100%">
+											<thead>
+												<tr>
+													<th style="text-align:center;width:33%">
+														@Html.DisplayNameFor(m => m.Product.Image1)
+													</th>
+													<th style="text-align:center;width:33%">
+														@Html.DisplayNameFor(m => m.Product.Image2)
+													</th>
+													<th style="text-align:center;width:33%">
+														@Html.DisplayNameFor(m => m.Product.Image3)
+													</th>
+												</tr>
+												<tr>
+													<td>
+														<img id="image1_@Model.Product.Id" src="@Model.Product.Image1" onerror="nofind()" style="max-width:300px" />
+														@Html.HiddenFor(p => p.Product.Image1)
+													</td>
+													<td>
+														<img id="image2_@Model.Product.Id" src="@Model.Product.Image2" onerror="nofind()" style="max-width:300px" />
+														@Html.HiddenFor(p => p.Product.Image2)
+													</td>
+													<td>
+														<img id="image3_@Model.Product.Id" src="@Model.Product.Image3" onerror="nofind()" style="max-width:300px" />
+														@Html.HiddenFor(p => p.Product.Image3)
+													</td>
+												</tr>
+												<tr>
+													<td>
+														@Html.TextBox("Image1", "", new { @class = "form-control", type = "file" })
+													</td>
+													<td>
+														@Html.TextBox("Image2", "", new { @class = "form-control", type = "file" })
+													</td>
+													<td>
+														@Html.TextBox("Image3", "", new { @class = "form-control", type = "file" })
+													</td>
+												</tr>
+											</thead>
+										</table>
+
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="inputNumber" class="col-sm-2 col-form-label">
+										@*商品描述*@
+										商品描述
+									</label>
+									<div class="col-sm-10">
+										@Html.TextAreaFor(m => m.Product.Descrition, new { @class = "form-control",@rows="5" })
+									</div>
+								</div>
+							</div>
+
+							@*按鈕*@
+							<div class="col-sm-12" style="text-align: center; ">
+								<button type="submit" class="btn btn-primary" onclick="return ValidateAdd()">修改</button>
+								<button type="submit" class="btn btn-primary" id="cancel">取消</button>
+								<button type="submit" class="btn btn-primary">清除</button>
+							</div>
+						}
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main><!-- End #main -->
+
+	<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+	<script type="text/javascript">
+
+	</script>
+</body>

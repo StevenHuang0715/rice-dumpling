@@ -1,0 +1,107 @@
+﻿@model FoodWebsite.Models.BuyPage02_Model
+
+@{
+	ViewBag.Title = "BuyPage02";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="~/Content/css-menu/all.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="~/Content/css-menu/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="~/Content/css-menu/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="~/Content/css-menu/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="~/Content/css-menu/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="~/Content/css-menu/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="~/Content/css-menu/responsive.css">
+
+}
+
+@section Scripts{
+	<script type="text/javascript">
+		$(function () {
+			var totalAmt = 0;
+			for (var i = 0; i < @Model.Products.Count; i++) {
+				var amount = Number(document.getElementById('price_' + i).innerHTML)
+					* Number(document.getElementById('qty_' + i).innerHTML);
+				document.getElementById('subAmt_' + i).innerHTML = amount;
+				totalAmt += Number(amount);
+			}
+			document.getElementById('totalPrice').innerHTML = totalAmt;
+		})
+
+		var qty = '';
+		var id = '';
+		$('#backBtn').click(function () {
+			for (var i = 0; i < @Model.Products.Count; i++) {
+				qty += document.getElementById('qty_' + i).innerHTML + ',';
+				id += $('#id_' + i).val() + ',';
+			}
+			$('#Qty').val(qty);
+			$('#Id').val(id);
+			debugger;
+			document.getElementById('form').action = "/Home/BuyPage01";
+			$('#form').submit();
+
+		})
+	</script>
+}
+<body>
+	<section class="w3l-about-breadcrumb">
+		<div class=" breadcrumb-bg-about py-5">
+			<div class="container py-lg-4 py-md-3">
+				<h2 class="title">Contact us</h2>
+			</div>
+		</div>
+	</section>
+	<div class="col-lg-8 col-md-12">
+		<div class="cart-table-wrap">
+			<form action="/Home/BuyPage03" method="post" id="form">
+				<table class="cart-table">
+					<thead class="cart-table-head">
+						<tr class="table-head-row">
+							<th class="product-image">Product Image</th>
+							<th class="product-name">Name</th>
+							<th class="product-price">Price</th>
+							<th class="product-quantity">Quantity</th>
+							<th class="product-total">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for (int i = 0; i < Model.Products.Count; i++)
+						{
+							<tr class="table-body-row">
+								<input type="hidden" id="id_@i" value="@Model.Products[i].Id" />
+								<td class="product-image"><img src="~/images/Food/meat2.jpg" alt=""></td>
+								<td class="product-name" id="name_@i">@Model.Products[i].Name</td>
+								<td class="product-price"><label id="price_@i">@Model.Products[i].Price</label></td>
+								<td class="product-quantity">
+									<label id="qty_@i">@Model.Qty.Substring(2*i,1)</label>
+								</td>
+								<td class="product-total"><label type="text" id="subAmt_@i"></label></td>
+							</tr>
+						}
+						<tr class="table-body-row">
+							<td><input id="backBtn" type="button" value="返回上一頁" /></td>
+							<td colspan="1">總計</td>
+							<td colspan="2"><span id="totalPrice">0</span>元</td>
+							<td colspan="1"><input id="check" type="submit" value="確定點餐" /></td>
+						</tr>
+					</tbody>
+				</table>
+				@Html.HiddenFor(m => m.Qty)
+				@Html.HiddenFor(m => m.Id)
+			</form>
+
+
+		</div>
+	</div>
+</body>

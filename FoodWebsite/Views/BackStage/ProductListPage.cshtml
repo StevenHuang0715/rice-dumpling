@@ -1,0 +1,146 @@
+﻿@model FoodWebsite.Models.ProductList_Model
+@{
+	ViewBag.Title = "ProductListPage";
+	Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+
+@section Scripts{
+	<script type="text/javascript">
+		function Edit(prod) {
+			var form = document.getElementById('form0');
+			form.action = '/BackStage/EditProductPage';
+			var id = prod.value;
+			$('#ProdId').val(id);
+			form.submit();
+		}
+
+		function Delete1(prod) {
+
+			$('#ProdId').val(prod.value);
+		}
+
+		function Delete2(prod) {
+			var form = document.getElementById('form0');
+			form.action = '/BackStage/DelProduct';
+			var id = $('#ProdId').val();
+			$('#ProdId').val(id);
+			form.submit();
+		}
+	</script>
+}
+
+<h2>ProductListPage</h2>
+
+
+<main id="main" class="main">
+
+	<div class="pagetitle">
+		<h1>Data Tables</h1>
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+				<li class="breadcrumb-item">Tables</li>
+				<li class="breadcrumb-item active">Data</li>
+			</ol>
+		</nav>
+	</div><!-- End Page Title -->
+	@using (Ajax.BeginForm("", "", new AjaxOptions()
+	{
+		HttpMethod = "POST",
+		UpdateTargetId = "main",
+		InsertionMode = InsertionMode.Replace
+	}))
+	{
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title">Datatables</h5>
+							<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+
+							<!-- Table with stripped rows -->
+							<table class="table datatable">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">名稱</th>
+										<th scope="col">分類</th>
+										<th scope="col">價格</th>
+										<th scope="col">庫存</th>
+										<th scope="col">功能鍵</th>
+										@*<th scope="col">商品描述</th>*@
+									</tr>
+								</thead>
+								<tbody>
+									@for (int i = 0; i < Model.Products.Count; i++)
+									{
+										int index = i + 1;
+										<tr>
+											<th scope="row">@index</th>
+											<td>@Model.Products[i].Name</td>
+											<td>@Model.Products[i].Group</td>
+											<td>@Model.Products[i].Price</td>
+											<td>@Model.Products[i].Stock</td>
+											<td>
+												<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal_@Model.Products[i].Id">
+													顯示描述
+												</button>
+												
+												<button type="button" class="btn btn-warning" onclick="Edit(this)" value="@Model.Products[i].Id">修改</button>
+												<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Modal_Confirm" onclick="return Delete1(this)" value="@Model.Products[i].Id">
+													刪除
+												</button>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+							<input type="hidden" id="ProdId" name="ProdId" />
+							<!-- End Table with stripped rows -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	}
+
+	<!-- 商品描述燈箱 -->
+	@for (int i = 0; i < Model.Products.Count; i++)
+	{
+		<div class="modal fade" id="Modal_@Model.Products[i].Id" tabindex="-1" aria-labelledby="ModalLabe_@Model.Products[i].Id" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title" id="ModalLabe_@Model.Products[i].Id">@Model.Products[i].Name 的商品描述</h3>
+					</div>
+					<h4 class="modal-body">
+						@Model.Products[i].Descrition
+					</h4>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+
+	<!--刪除確認燈箱-->
+	<div class="modal fade" id="Modal_Confirm" tabindex="-1" aria-labelledby="ModalLabe" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title" id="ModalLabe">確定刪除嗎</h3>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="Delete2()">確定</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main><!-- End #main -->
