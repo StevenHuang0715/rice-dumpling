@@ -429,6 +429,7 @@
     <Content Include="Scripts\back\remixicon\remixicon.ttf" />
     <Content Include="Scripts\back\remixicon\remixicon.woff" />
     <Content Include="Scripts\back\remixicon\remixicon.woff2" />
+    <None Include="Properties\PublishProfiles\Source_FoodWebsite.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
